@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 给下列类提供bean的构造方法 -->
+	<bean id="basicPackage" class="com.honglin_chen.spring_ioc.bean.BasicPackage"></bean>
+	<bean id="businessPackage" class="com.honglin_chen.spring_ioc.bean.BusinessPackage"></bean>
+	<!-- 给下列服务提供bean的构造方法 -->
+	<!-- class属性规定需要被用于创建bean的bean类 -->
+	<!-- id属性标记bean识别器 -->
+	<bean id="customerService" class="com.honglin_chen.spring_ioc.service.CustomerService">
+		<!-- 给服务中的接口成员变量提供特性名称 -->
+		<!-- properties: 该属性通过setter方法实现依赖注入 -->
+		<!-- property name属性通过捆绑CustomerService类的customerPackage成员变量实现依赖注入 -->
+		<property name="customerPackage">
+			<!-- reference tag 的 bean 属性允许当前bean可以access到在其它XML文件定义的bean类 -->
+			<ref bean="basicPackage" />
+		</property>
+	</bean>
+	
+</beans>
+
+<!-- 创建 Spring Bean 构造文件 -->
